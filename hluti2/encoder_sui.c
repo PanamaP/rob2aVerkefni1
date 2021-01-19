@@ -1,40 +1,43 @@
 
-#pragma config(Sensor, dgtl1,  rightEncoder,   sensorQuadEncoder)
-#pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
+#pragma config(Sensor, dgtl6,  rightEncoder,   sensorQuadEncoder)
+#pragma config(Sensor, dgtl8,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           rightMotor,    tmotorServoContinuousRotation, openLoop, reversed)
 #pragma config(Motor,  port10,           leftMotor,     tmotorServoContinuousRotation, openLoop)
 
-int rotation = 700; // 3 rotations and 45degree
+/* Program which makes your robot go forward and backwards by increment of 0.5m each time until 2.5m*/
+
+// circumference = diameter of wheel x pi
+// 10.16 * pi = 31.9
+
+
+// distance = circumference x number of revolutions
+// 50/32 =  1.56 * 360 = 563
+
+
+int rotation = 563;
 int power = 126;
 
 void drive(int dist){
 	SensorValue[rightEncoder] = 0;
   SensorValue[leftEncoder] = 0;
 
-	while(SensorValue[leftEncoder] < (rotation*dist))
+	while(abs(SensorValue[leftEncoder]) < (rotation*dist))
   {
     motor[rightMotor] = power;
-    motor[leftMotor] = power;
+    motor[leftMotor] = -power;
 
   }
-  while(SensorValue[leftEncoder] > 0)
+  while(abs(SensorValue[leftEncoder]) > 0)
   {
     motor[rightMotor] = -power;
-    motor[leftMotor] = -power;
+    motor[leftMotor] = power;
 
   }
 }
 
 task main()
 {
-
-  //Clear Encoders
-
-
   for(int i = 0; i<6;i++){
   	drive(i);
   }
-
-
-
 }
