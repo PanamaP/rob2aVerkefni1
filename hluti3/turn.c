@@ -28,7 +28,7 @@ void drive(){
 void turn(int deg, int side){
 	while(SensorValue[leftEncoder] < deg*basedeg){
 	motor[leftMotor] = 127*side;
-	motor[rightMotor] = -127*side;
+	motor[rightMotor] = 127*side;
 	}
 	drive();
 }
