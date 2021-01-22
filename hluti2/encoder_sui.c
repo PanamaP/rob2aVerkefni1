@@ -4,7 +4,10 @@
 #pragma config(Motor,  port1,           rightMotor,    tmotorServoContinuousRotation, openLoop, reversed)
 #pragma config(Motor,  port10,           leftMotor,     tmotorServoContinuousRotation, openLoop)
 
-/* Program which makes your robot go forward and backwards by increment of 0.5m each time until 2.5m*/
+/*Þetta forrit er eins og fyrsta verkefnið ( suiside ) en nú er notað encoder gildi í stað tíma. Við notum sama Drive fall og í fyrsta forritinu þar sem að það
+er svokallað global fall. Hér notum við absolue til þess að forritð keyri í gegn þótt að við erum með mínus tölu í encoder gildinu. Síðan keyrum við forritið í task
+main með for loopu eins og í verkefni 1.
+*/
 
 // circumference = diameter of wheel x pi
 // 10.16 * pi = 31.9
